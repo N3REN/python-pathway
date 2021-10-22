@@ -618,3 +618,19 @@ array1 = np.array([10, 9, 8, 7, 6])
 x = random.permutation(array1)
 print(x) #permutation creates new array
 
+
+'''Seaborn'''
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+#Distplots (distribution plot)
+sns.distplot([0, 1, 2, 3, 4, 5, 6])
+plt.show()
+
+#Distplot without histogram
+sns.distplot([2, 3, 4, 5, 6, 7], hist = False)
+plt.show()
+
+
+'''Normal Distribution'''
