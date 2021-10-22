@@ -602,3 +602,19 @@ print(x)
 
 
 
+'''Random Permutation'''
+from numpy import random
+import numpy as np
+
+#'shuffle()'
+array = [1, 2, 3, 4, 5] #can be np array
+
+random.shuffle(array)
+print(array) # shuffle changes the array
+
+#'permutation()'
+array1 = np.array([10, 9, 8, 7, 6])
+
+x = random.permutation(array1)
+print(x) #permutation creates new array
+
