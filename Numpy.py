@@ -634,3 +634,298 @@ plt.show()
 
 
 '''Normal Distribution'''
+
+from numpy import random
+#normal distribution fits the probability distribution of many real sets
+a = random.normal(size = (3, 2))
+print(a)
+
+#parameters: 
+#loc = location of the mean value
+#scale = the height of the distribution graph
+#size = shape of array
+
+#normal distribution of (2, 4) and scale of 2
+
+b = random.normal(size = (2, 4), scale = 2)
+print(b)
+
+#Visualize a normal distribution 
+from matplotlib import pyplot as plt
+import seaborne as sns
+
+
+c = random.normal(size = (1750))
+plt.distplot(c, hist=False)
+plot.show
+
+'''Binomial Distribution'''
+# discrete distribution (only 2 possible outcomes, e.g coin toss)
+
+from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+n = random.binomial(n = 10, p = 0.5, size = 26)
+# parameters
+# n = no. of possible outcomes, p = probability of occurrence, size = size of array
+print(n)
+
+# Binomial distribution plot
+sns.distplot(random.binomial(size = 150, n = 10, p = 0.7), hist = True, kde = False)
+plt.show()
+
+
+# showing comparison between normal and binomial distributions:
+
+from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.distplot(random.normal(size=250, scale = 5, loc = 50))
+sns.distplot(random.binomial(size=250, n = 100, p=0.5))
+plt.show()
+#The main difference is that normal is continuous while binomial is discrete. Both distributions look similar in plot
+
+
+'''Poisson Distribution'''
+# A discrete distribution 
+# Shows the number of times an event is likely to occur
+# parameters: lam = number of known occurrences, size = shape of resulting array
+
+from numpy import random
+r = random.poisson(lam = 3, size = (2, 3))
+print(r)
+
+# Visualizing distribution
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+a = random.poisson(lam = 5, size = 600)
+sns.displot(a, kde = True)
+
+plt.show()
+
+#Comparison between Normal and Poisson distribution
+
+sns.displot(random.normal(scale = 7, loc = 50, size = 1000), kind = "kde", label = "Normal")
+sns.displot(random.poisson(lam = 50, size = 1000), kind = "kde", label = "Poisson")
+plt.show()
+
+# Poisson distribution is discrete but with enough points they have similar plots
+
+
+'''Uniform Distribution'''
+
+#every event has an equal chance of occurrence
+#parameters: a = lower bound, b = upper bound, size = shape if resulting array
+
+from numpy import random
+import seaborn as sns
+from matplotlib import pyplot as plt
+print(random.uniform(low = 1, high = 10, size = 27))
+
+#Vizualization
+x = random.uniform(low = 10, high = 120, size = 725)
+sns.displot(x, kind = "kde")
+
+plt.show()
+
+
+
+'''Logistic Distribution'''
+
+# used to describe growth
+#parameters:- 
+#loc = position of peak of plot, scale = height of graph, size = size of returned array
+
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+y = np.random.logistic(loc = 11, scale = 4, size = 650)
+print(y)
+
+#Vizualization
+sns.displot(y, kde = True)
+
+plt.show()
+
+#Difference between logistic and normal distributions
+
+sns.distplot(np.random.normal(scale = 2, size = 1000), hist = False)
+sns.distplot(np.random.logistic(size = 1000), hist =  False)
+
+plt.show()
+
+#Logistic distribution has a higher chance of occurrence of values far from the mean. 
+#With a high standards deviation, logistic distribution has a plot similar to that of the normal distribution, except for the peak
+
+
+'''Multinomial Distribution'''
+
+#Like binomial distribution, only multiple possible outcomes instead of just 2
+
+from numpy import random
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+x = random.multinomial(n = 12, pvals = [1/6, 1/6, 1/6, 1/6, 1/6, 1/6], size = 6)
+print(x)
+
+#parameters: 
+# n = total no. of trials (e.g. no of die tosses)
+# p = probability value of each possible outcome
+# (the number of pvals = no. of possible outcomes)
+# size = shape of output array (also the number of times trials (n) are repeated)
+
+#Visualization
+
+sns.distplot(random.multinomial(20, pvals = [1/6]*6, size = 1000), hist = False)
+
+plt.show()
+
+#The plot of multinomial distribution is similar to 
+#multiple binomial distribution plots. 
+
+#Comparison: It has the same similarities to a normal distribution as multiple binomial distribution
+
+
+
+''Exponential Distribution (alphacodingskills.com)'''
+
+# Exponential distribution is used to express
+
+# intervals between events, e.g visitors entering a store
+
+# or how frequently a subscription for a service online is purchased
+
+# parameters: 
+
+# scale = (inverse of rate (lam) parameter of Poisson distribution)
+
+# size = shape of returned array
+
+from numpy import random
+
+import seaborn as sns
+
+import matplotlib.pyplot as plt
+
+a = random.exponential(scale = 1, size = (5, 3))
+
+print(a)
+
+#Visualization exponential distribution
+
+sns.displot(random.exponential(size = 100))
+plt.title("Visualization of exponential distribution")
+
+plt.show()
+plt.close()
+
+s = 1000
+sns.kdeplot(random.exponential(size = s, scale = 1))
+sns.kdeplot(random.exponential(size = s, scale = 2))
+sns.kdeplot(random.exponential(size = s, scale = 3))
+plt.legend([
+  r"$\beta$ = 1",
+  r"$\beta = 2$",
+  r"$\beta$ = 3",
+])
+
+plt.show()
+plt.close()
+
+#Visualize cumulative distribution function
+
+sns.ecdfplot(random.exponential(size = s, scale = 1))
+sns.ecdfplot(random.exponential(size = s, scale = 2))
+sns.ecdfplot(random.exponential(scale = 3, size = s))
+
+plt.show
+
+#Comparison between exponential and Poisson distribution: Poisson considers the number of times an event occurs over a period, Exponential deals with the time between events
+
+
+
+'''Chi Square distribution'''
+
+#Used to verify hypothesis 
+#parameters: df = degree of freedom
+#size = shape of resulting array
+
+from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+x = random.chisquare(df = 3, size = (2, 4))
+print(x)
+
+#Visualization 
+
+y = random.chisquare(df = 2, size = 10000)
+
+sns.kdeplot(y)
+
+plt.show()
+plt.close()
+
+
+'''Rayleigh Distribution'''
+
+#Used in signal processing
+#parameters: 
+#scale = standard deviation
+#size = shape of array
+
+a = random.rayleigh(scale = 1, size = (3, 3))
+print("\n\n", a)
+
+
+b = random.rayleigh(size = 2750)
+
+sns.displot(b, kind = "kde")
+
+plt.show()
+plt.close()
+
+#Similarity between Chi Square and Rayleigh distributions :
+#At unit standard deviation 
+#Rayleigh represents the same distribution as 
+#Chi square with degree of freedom = 2
+
+
+'''Pareto Distribution'''
+#A distribution which follows Pareto's (the 80-20) law 
+#(20% of factors cause 80% of outcome) 
+#parameters: a = shape, size = shape of output array
+
+print(random.pareto(a = 3, size = 7))
+
+#Visualization
+c = random.pareto(a = 2, size = 795)
+
+sns.displot(c, kde = True)
+plt.show()
+
+
+'''Zipf Distribution'''
+
+#Used to sample data based on Zipf's law
+#(The nth common term in a collection is
+#1/n times as common as the most common term) 
+
+#parameters: a = distribution, 
+#size = shape of array
+
+from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+print(random.zipf(a = 2, size = (6, 10)))
+
+#Vizualization
+z = random.zipf(a = 2, size = 975)
+sns.displot(z[z<=10]) # only plot values 10 and below for visibility
+plt.show()
