@@ -929,3 +929,493 @@ print(random.zipf(a = 2, size = (6, 10)))
 z = random.zipf(a = 2, size = 975)
 sns.displot(z[z<=10]) # only plot values 10 and below for visibility
 plt.show()
+
+
+
+'''Numpy ufuncs (Universal Functions)'''
+
+# Functions that operates on numpy ndarray objects
+
+'''Add the elements of two iterables'''
+
+a = [5, 4, 3, 2, 1]
+b = [6, 7, 8, 9, 10]
+c = []
+
+# This can be achieved using 
+# Python's built in 'zip()' method
+x = zip(a, b)
+
+for (y, z) in x:
+  c.append(y+z)
+
+print(c)
+######
+
+# Numpy has a built in method:-
+'''add()''' 
+# which achieves the same
+
+import numpy as np
+m = np.array(a)
+n = np.array(b)
+print(m, n)
+
+h = np.add(m, n) # or ...add(a, b)
+
+print(h)
+
+'''Create ufunc'''
+# use the 'frompyfunc()' method
+# parameters: 
+# function = name of Python function
+# input = no. of input arrays
+# output = no. of output arrays
+
+import numpy as np
+
+def addp(a, b, c):
+  return a + b + c
+
+npfunction = np.frompyfunc(addp, 3, 1)
+
+x = npfunction([1, 2, 3], [4, 5, 6], [7, 8, 9])
+print(x)
+
+#Check if function is ufunc
+print(type(npfunction))
+print(type(np.concatenate))
+
+if type(np.add) == np.ufunc:
+  print("\'add\' is a universal function")
+else:
+  print("\'add\' is not a universal function")
+
+
+
+'''Numpy Univesal Functions: Simple Arithmetic'''
+
+# numpy has Universal functions
+# that make it possible to define the
+# conditions for arithmetic operations
+
+# the arithmetic functions have a where
+# parameter which defines the condition
+
+import numpy as np
+
+#add: sums the content of 2 arrays
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([6, 7, 8, 9, 10])
+z = np.array([11, 12, 13, 14, 15])
+
+a = np.add(x, y)
+print(a)
+
+#subtract: subtracts the content of 2 arrays
+
+b = np.subtract(y, x)
+print(b)
+
+# multiply: multiply the elements in one array 
+# with elements in another as new array
+
+import numpy as np
+
+a = np.array([5, 4, 3, 2, 1])
+b = np.array([11, 12, 13, 14, 15])
+
+c = np.multiply(a, b)
+print(c)
+
+# divide: new array from dividing 
+# the elements of one array with 
+# elements of another array
+
+d = np.divide(b, a)
+print(d)
+
+# power: raises the elements in one array
+# to the power of elements in another array
+
+e = np.power(b, a) 
+print(e)
+
+# mod or remainder: divides one array's
+# elements by another's and gives the 
+# remainders
+import numpy as np
+
+arr1 = np.array([1, 2, 3, 4, 5])
+arr2 = np.array([20, 21, 22, 23, 24])
+
+x = np.mod(arr2, arr1)
+print(x)
+y = np.remainder(arr2, arr1)
+print(y)
+
+# divmod: divides elements of an array by elements of another 
+# and gives the quotient and remainder 
+# in 2 new arrays
+
+z = np.divmod(arr2, arr1)
+print(z)
+
+# absolute (or abs): gives the absolute
+# values of elements in an array 
+
+arr3 = np.array([-7, -14.22, -3.0, -6.00, 23, 16.01])
+
+a = np.absolute(arr3)
+print(a)
+
+
+
+'''Rounding decimals'''
+
+# There are multiple ways to do this
+# with numpy universal functions:-
+# trunc (truncate) & fix, 
+# around (round decimal up or down), 
+# floor (round down), ceil (round up)
+
+import numpy as np
+
+# trunc and fix: remove decimals and
+# gives the integer nearest to 0
+a = np.array([4.12, -4.99])
+
+x = np.trunc(a)
+print(x)
+
+y = np.fix(a)
+print(y)
+
+#around: specify number of decimal
+#places. If the preceding number is
+#less than 5, the last number is 
+#rounded down, otherwise it is 
+#rounded up
+
+b = np.array([2.17, 2.51])
+c = np.array([13.65333, 4.41879])
+
+print(np.around(b, 0))
+print(np.around(c, 2))
+
+#floor: rounds down a decimal, giving
+#the lower float form instead
+
+d = np.floor(a)
+
+print(d)
+
+#ceil: rounds up a decimal, giving 
+#the higher float form
+
+e = np.ceil(a)
+
+print(e)
+
+
+'''Numpy Log'''
+
+# numpy has functions for log at base
+
+# 2, 10 and e
+
+import numpy as np
+
+#log at base 2
+
+array = np.arange(0, 10, 0.5)
+
+log2 = np.log2(array)
+
+print(log2)
+
+#log at base 10
+
+x = np.arange(1, 10.1)
+
+log10 = np.log10(x)
+
+print(log10)
+
+#log at base e
+
+log = np.log(array)
+
+print(log)
+
+
+# Logarithm at other bases
+# can be obtained from the 'logs'
+# functions of the 'math'module
+
+from math import log
+
+nplog = np.frompyfunc(log, 2, 1)
+
+num = 9
+base = 3
+
+log3 = nplog(num, base)
+print("\n\nThe logarithm of {} at base {} is: ".format(num, base), log3)
+
+
+
+'''Numpy Summation'''
+
+# summation (sum) differs from 
+# addition (add). Add sums 
+# corresponding elements of 2 arrays
+# while sum adds all the elements of
+# arrays.
+
+import numpy as np
+
+ar1 = np.array([1, 2, 3, 4])
+ar2 = np.array([1, 2, 3, 4])
+
+x = np.sum([ar1, ar2])
+
+y = np.add(ar1, ar2)
+print(x, y)
+
+z = np.sum(ar1)
+print(z)
+
+# Summation by axis:- specify axis 
+# to sum the elements of each array
+
+a = np.sum([ar1, ar2], axis = 1)
+print(a)
+
+# Cumulative sum: sum each element 
+# 8with the preceding numbers
+
+b = np.cumsum([ar1])
+c = np.cumsum([ar1, ar2])
+print(b, c)
+
+
+'''Numpy Product'''
+
+# Use the product the prod function
+import numpy as np
+
+arr = np.array([2, 4, 6, 8])
+arr2 = np.array([1, 2, 3, 4])
+
+n = np.prod([arr, arr2])
+print(n)
+
+# Find product of each axis/dimension
+
+x = np.prod([arr, arr2], axis = 1)
+print(x)
+
+# Find cummulative product (cumprod)
+
+y = np.cumprod([arr2, arr])
+print(y)
+
+
+'''Numpy Differences'''
+
+# Use the diff function. It gives the
+# discrete difference (difference btw
+# each element and the following one)
+
+import numpy as np
+
+array = np.array([2, 4, 6, 8, 12, 18])
+
+x = np.diff(array)
+print(x)
+
+# repeat the process on the result:-
+
+y = np.diff(array, n = 2)
+print(y)
+
+
+
+'''NumPy LCM'''
+
+# Use function lcm
+
+import numpy as np
+
+x = np.lcm(8, 20)
+print(x)
+
+# lcm of array
+
+a = np.array([3, 6, 9])
+
+y = np.lcm.reduce(a)
+print(y)
+
+b = np.array([[1, 2, 4], [3, 6, 9]])
+
+z = np.lcm.reduce(b)
+print(z)
+
+# Find the LCM of numbers 1 to 10
+
+a = np.arange(1, 11)
+
+print(a, np.lcm.reduce(a))
+
+
+'''Numpy finding GCD (HCF)'''
+
+# Use the gcd function
+
+import numpy as np
+
+a = 12
+b = 18
+
+x = np.gcd(a, b)
+print(x)
+
+# GCD of an array
+
+c = np.array([12, 4, 16, 20, 8])
+
+y = np.gcd.reduce(c)
+print(y)
+
+
+
+
+'''Numpy Trigonometric functions'''
+
+#numpy has sin, cos and tan functions
+
+import numpy as np
+
+pi = np.pi
+
+a = pi/2
+
+x = np.sin(a)
+
+print(x)
+
+# Find sine of array elements
+
+b = np.array([pi, 0.5*pi, 0.333*pi, 
+
+              .25*pi, .2*pi])
+
+y = np.sin(b)
+z = np.cos(b)
+
+print(y, "\n\n", z)
+
+# These functions take only values in
+
+# radians. to convert from degree to
+
+# radians and vice versa:-
+
+c = np.deg2rad(np.array([270, 180, 90, 45, 9]))
+
+print(c)
+
+d = np.rad2deg(b)
+
+print(d)
+
+# Find angles (in radians) from cos &
+# sin values using arcsin, arccos & arctan
+
+g = np.arcsin(y)
+h = np.arccos(z)
+
+print("\n\n Angles from sine: {}\n\nAngles from cos: {} \n(in radians)".format(g, h))
+
+# Find Hypoteneus using hypot function 
+# by specifying base h pependicular values
+
+print(np.hypot(3, 4))
+
+
+'''Numpy hyperbolic functions'''
+
+# Use functions sinh, cosh & tanh to
+# find hyperbolic sin cos & tan values
+
+import numpy as np
+
+pi = np.pi
+
+a = np.array([pi, pi/2, pi/3, pi/4, pi/5])
+
+x = np.sinh(a)
+print(x)
+
+y = np.tanh(a)
+print(y)
+
+
+# Find angles (in rad) from sinh, 
+# cosh & tanh values
+
+g = np.arcsinh(x)
+
+h = np.arctanh(y)
+
+print("The angles (in rad) from sinh: \n{} \nAnd from tanh: \n{}".format(g, h))
+
+
+'''Numpy Set Operations'''
+
+import numpy as np
+
+# Find unique elements
+
+arr = np.array([10, 9, 9, 9, 8, 7, 7,
+                6, 5, 4, 3, 3, 2, 1, 
+                1])
+
+x = np.unique(arr)
+print(x)
+
+# Combination of 2 sets
+
+ar1 = np.array([1, 2, 3, 3, 4, 5, 6])
+ar2 = np.array([5, 6, 7, 8, 8, 9, 10])
+
+y = np.union1d(ar1, ar2)
+print(y)
+
+# Intersection of 2 sets
+# assume_unique = True can speed 
+# up operation, but counts duplicate
+# elements
+
+a = np.intersect1d(ar1, ar2, assume_unique = True)
+b = np.intersect1d(ar1, ar2)
+print(a, b)
+
+# Values in the 1st but not in 
+# the 2nd (difference)
+
+c = np.setdiff1d(ar1, ar2)
+print(c)
+
+# assume_unique
+d = np.setdiff1d(ar2, ar1, assume_unique = True)
+print(d)
+
+# Find values not present in both sets
+z = np.setxor1d(ar2, ar1)
+print(z)
+
+h = np.setxor1d(ar2, ar1, assume_unique = True)
+print(h)
