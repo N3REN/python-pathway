@@ -265,3 +265,96 @@ print(csgraph.depth_first_order(csarr, 0))
 # first traversal from a node
 
 print(csgraph.breadth_first_order(csarr, 0))
+
+
+
+'''Scipy Spaial Data'''
+# Spatial data is data represented in a geometric space
+# the 'scipy.spatial' module provides functions to work with spatial data
+
+# Triangulation: divide a polygon into multiple triangles to compute it's area
+
+import numpy as np
+from scipy import spatial
+import matplotlib.pyplot as plt
+
+coordinates = np.array([
+  [4, 2],
+  [4, 3],
+  [0, 3],
+  [2, 2],
+  [1, 4]
+])
+
+simplices = spatial.Delaunay(coordinates).simplices
+
+plt.triplot(coordinates[:, 0], coordinates[:, 1], simplices)
+plt.scatter(coordinates[:, 0], coordinates[:, 1], c = '#e44f5c')
+
+#Convex Hull: the smallest polygon that will cover all given points
+
+coordinates = np.array([
+    [4, 2],
+    [4, 3],
+    [0, 3],
+    [2, 2],
+    [1, 4],
+    [2, 1],
+    [0, 5],
+    [1, 3],
+    [2, 1],
+    [2, 0]
+])
+
+enclosure = spatial.ConvexHull(coordinates)
+hull_points = enclosure.simplices
+
+plt.scatter(coordinates[:, 0], coordinates[:, 1])
+for simplex in hull_points:
+	plt.plot(coordinates[simplex, 0], coordinates[simplex, 1], '#e44f5c')
+
+plt.show()
+
+#KDTrees: datastructures for nearest neighbor queries, ie, find out which points are closest to a specified point:-
+
+#KDTree() creates a KDTree object
+neighborhood = [(1, -1), (2, 3), (2, -3), (-2, 3)]
+
+kdtree = spatial.KDTree(neighborhood)
+
+# 'query()' gives the distance to the nearest neighbour and the index location of the neighbour
+location = spatial.KDTree(neighborhood).query((2, 2))
+
+print("KDTree object: ", neighborhood, "\n", "Distance between (2, 2) and it's nearest neighbor, and neighbor's index: ", location)
+
+#Distance Matrices: used to find various types of distance between points.
+
+# Euclidean Distance
+
+pointA = (1, 1)
+pointB = (4, 5)
+
+eudist = spatial.distance.euclidean(pointA, pointB)
+
+print(eudist)
+
+# Cityblock Distance (Manhattan Distance): distance horizontally or vertically, not diagonally
+
+ctbdist = spatial.distance.cityblock(pointA, pointB)
+
+print(ctbdist)
+
+#Cosine Distance: cosine angle between two points
+
+cosdist = spatial.distance.cosine(pointA, pointB)
+
+print(cosdist)
+
+#Hamming Distance
+
+pointX = (True, False, True, True)
+pointY = (False, False, True, True)
+
+hamdist = spatial.distance.hamming(pointX, pointY)
+
+print(hamdist)
