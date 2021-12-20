@@ -358,3 +358,153 @@ pointY = (False, False, True, True)
 hamdist = spatial.distance.hamming(pointX, pointY)
 
 print(hamdist)
+
+
+
+'''SciPy Matlab Arrays'''
+
+import numpy as np
+from scipy import io
+
+arr = np.array(np.arange(10))
+
+# Export Matlab format:-
+# (required) filename, dict 
+# containing data & (optional) 
+# specify whether to compress data
+
+io.savemat('arr.mat', {"vector": arr}, 
+           do_compression = False)
+
+# Import Matlab format
+
+matdata = io.loadmat('arr.mat')
+print(matdata)
+
+# To print only the array:-
+
+print(matdata["vector"])
+
+
+
+'''SciPy Interpolation'''
+
+# this involves generating points
+# between known points.
+
+# The scipy module 'interpolate' has
+# functions used in interpolation
+
+import numpy as np 
+from scipy import interpolate
+
+# 1-D interpolation: interpolate a 
+# distribution with one variable
+
+x = np.arange(1, 10, 1)
+y = 2*x + 1
+
+interp_func = interpolate.interp1d(x,
+                                   y) 
+
+print(interp_func(np.arange
+                  (2.1, 3, 0.1)))
+# interpolates the values of y for 
+# values of x from 2.1, 2.2... to 2.9
+
+
+# Univariate Spline Interpolation:-
+# involves interpolating for a
+# function that has different
+# definitions at different ranges
+
+x = np.arange(10)
+y = x**2 + np.sin(x) + 1
+
+univ_func = interpolate.UnivariateSpline(x, y)
+
+print(univ_func(np.arange(2.1, 3.1, 0.1)))
+
+
+# Radial basis function interpolates
+# corresponding to a fixed reference 
+# point
+
+x = np.arange(1, 10)
+y = x**2 + np.sin(x) + 1
+
+rbf_func = interpolate.Rbf(x, y)
+
+rbf_interp = rbf_func(np.arange(3.1, 4, 0.1))
+
+print(rbf_interp)
+
+
+
+'''SciPy Statistical Significance Tests'''
+
+# statistical significance shows that
+# results obtained are not random
+
+# one tailed and two tailed tests
+# test for one and two alternative
+# assumptions respectively
+
+# T-test determines if there is 
+# significant difference between
+# the means of two variables, to
+# check if they belong to the same
+# distribution 
+
+import numpy as np 
+from scipy import stats
+
+a = np.random.normal(size = 500)
+b = np.random.normal(size = 500)
+
+ttest = stats.ttest_ind(a, b)
+print(ttest)
+
+# show only the pvalue
+print(stats.ttest_ind(b, a).pvalue)
+
+
+# KS-test is used to know if values
+# follow a distribution
+
+kstest = stats.kstest(a, b) 
+
+print(kstest)
+
+
+# Statistical description of data:-
+# use the 'describe()' function
+
+dt = np.random.normal(size = 1000)
+
+description = stats.describe(dt)
+print(description) 
+# nobs = number of observations
+
+# Skewness and Kurtosis are the basis 
+# of normality tests. 
+# Skewness is a measure of data 
+# symmetry. It is 0 for normal data 
+# distribution
+# Kurtosis is a measure of whether
+# data is heavily (+ve) or 
+# lightly (-ve) tailed to a normal
+# distribution
+
+skew = stats.skew(dt)
+kurtosis = stats.kurtosis(dt)
+
+print(skew, kurtosis)
+
+# Check if data comes from a normal
+# distribution
+
+norm = stats.normaltest(dt)
+print(norm)
+
+
