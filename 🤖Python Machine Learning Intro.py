@@ -450,25 +450,25 @@ print(model(5)) # corresponds to plot
 # learning from prior experience 
 
 import pandas as pd
-# import pydotplus
+import pydotplus
 from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt 
 import matplotlib.image as pltimg
 
-df = pd.read_csv("https://www.w3schools.com/python/cars2.csv")
+df = pd.read_csv("https://docs.google.com/spreadsheets/d/1ukc5L5JeqktUDps4KSq7qS6JLkPEpCKysR9S44IzO04/export?format=csv&gid=0")
 
 # Use the pandas method 'map()' to
 # Convert non numerical columns. 
 # Required for decision tree
 
-# country = {'UK':0, 'USA':1, 'N':2}
-# go = {'NO':0, 'YES':1}
+country = {'UK':0, 'USA':1, 'N':2}
+go = {'NO':0, 'YES':1}
 
-# df["Nationality"] = df["Nationality"].map(country)
-# df["Go"] = df["Go"].map(go)
+df["Nationality"] = df["Nationality"].map(country)
+df["Go"] = df["Go"].map(go)
 
-# print(df.head())
+print(df.head())
 
 
 # Separate data into features and
